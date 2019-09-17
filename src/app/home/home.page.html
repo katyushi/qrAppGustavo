@@ -1,14 +1,48 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="primary">
     <ion-title>
-      Ionic Blank
+      QR CODE
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-item>
+    <ion-input type="text" placeholder="MY QR Code data" [(ngModel)]="qrData">
+    </ion-input>
+  </ion-item>
+
+  <ion-segment [(ngModel)]="elementType">
+    <ion-segment-button value="canvas">
+      <ion-label>Canvas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="img">
+      <ion-label>Imagem</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="url">
+      <ion-label>Endereço URL</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-button expand="full" (click)="scanCode()" color="secondary">
+    <ion-icon name="qr-scanner"></ion-icon>
+    SCANNER
+  </ion-button>
+
+  <ion-card *ngIf="qrData" text-center>
+    <ngx-qrcode [qrc-value]="qrData" [qrc-element-type]="elementType" qrc-class="my-code">
+    </ngx-qrcode>
+    <ion-card-content>
+      <ion-button expand="full" color="tertiary" (click)="downloadQR()" *ngIf="elementType === 'canvas'">
+        <ion-icon name="download" slot="start"></ion-icon>
+        Download QR Code
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="scannedCode">
+    <ion-card-content>
+      Result from Scan: {{ scannedCode }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
