@@ -24,3 +24,21 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
   declarations: [HomePage]
 })
 export class HomePageModule {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
